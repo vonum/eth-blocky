@@ -60,11 +60,14 @@ class EthBlocky:
 
     def _best_match(self, timestamp, block_timestamp, block, before):
         if timestamp < block_timestamp and before:
-            return block - 1
+            block -= 1
         elif timestamp > block_timestamp and not before:
-            return block + 1
-        else:
-            return block
+            block += 1
+
+        return self._block(block)
+
+    def _block(self, block):
+        return self.web3.eth.get_block(block)
 
     def _timestamp(self, block):
-        return self.web3.eth.get_block(block).timestamp
+        return self._block(block).timestamp
