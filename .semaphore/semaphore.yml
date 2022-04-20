@@ -7,6 +7,8 @@ agent:
 blocks:
   - name: Tests against node
     task:
+      secrets:
+        - name: eth-blocky
       jobs:
         - name: 'Job #1'
           commands:
