@@ -1,13 +1,15 @@
 version: v1.0
-name: Initial Pipeline
+name: CI Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: 'Block #1'
+  - name: Tests against node
     task:
       jobs:
         - name: 'Job #1'
           commands:
             - checkout
+            - pip install -r requirements.txt
+            - python -m pytest tests
