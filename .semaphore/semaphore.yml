@@ -1,0 +1,17 @@
+version: v1.0
+name: CI Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Tests against node
+    task:
+      secrets:
+        - name: eth-blocky
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - pip install -r requirements.txt
+            - python -m pytest tests
