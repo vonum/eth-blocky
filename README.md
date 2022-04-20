@@ -1,4 +1,8 @@
 # eth-blocky
+[![Build Status](https://vonum.semaphoreci.com/badges/eth-blocky.svg)](https://vonum.semaphoreci.com/projects/eth-blocky)
+[![PyPI version](https://badge.fury.io/py/eth-blocky.svg)](https://badge.fury.io/py/eth-blocky)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Package providing date utilities for finding blocks.
 
 With `eth-blocky`, you can:
