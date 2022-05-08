@@ -17,9 +17,9 @@ class EthBlocky:
         end_timestamp = self._timestamp(end_block)
 
         if start_block == end_block:
+            block = self._block(start_block)
             return self._best_match(timestamp,
-                                    start_timestamp,
-                                    start_block,
+                                    block,
                                     before)
 
         avg_block_time = self._average_block_time(start_block,
@@ -58,13 +58,35 @@ class EthBlocky:
     def _estimated_blocks_to_target(self, timestamp, expected_timestamp, avg_block_time):
         return int((timestamp - expected_timestamp) / avg_block_time)
 
-    def _best_match(self, timestamp, block_timestamp, block, before):
-        if timestamp < block_timestamp and before:
-            block -= 1
-        elif timestamp > block_timestamp and not before:
-            block += 1
+    def _best_match(self, timestamp, block, before):
+        if before:
+            return self._best_before(timestamp, block)
+        else:
+            return self._best_eq_or_after(timestamp, block)
 
-        return self._block(block)
+    def _best_before(self, timestamp, block):
+        if block.timestamp == timestamp:
+            return self._block(block.number - 1)
+        elif block.timestamp > timestamp:
+            while block.timestamp >= timestamp:
+                block = self._block(block.number - 1)
+            return self._block(block.number)
+        elif block.timestamp < timestamp:
+            while block.timestamp < timestamp:
+                block = self._block(block.number + 1)
+            return self._block(block.number - 1)
+
+    def _best_eq_or_after(self, timestamp, block):
+        if block.timestamp == timestamp:
+            return block
+        elif block.timestamp > timestamp:
+            while block.timestamp > timestamp:
+                block = self._block(block.number - 1)
+            return self._block(block.number + 1)
+        elif block.timestamp < timestamp:
+            while block.timestamp < timestamp:
+                block = self._block(block.number + 1)
+            return self._block(block.number)
 
     def _block(self, block):
         return self.web3.eth.get_block(block)
