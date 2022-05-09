@@ -36,6 +36,7 @@ class EthBlocky:
                                                        avg_block_time)
         expected_block += block_delta
         r = abs(block_delta)
+        if r == 1: r = 0
 
         return self._closest_block(timestamp,
                                    expected_block - r,
