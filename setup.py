@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="eth-blocky",
-    version="0.2.1",
+    version="0.2.2",
     author="Milan Keca",
     author_email="vonum.mk@gmail.com",
     description="Ethereum utilities for mapping blocks to timestamps",
