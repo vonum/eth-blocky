@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="eth-blocky",
-    version="0.2.2",
+    version="0.2.3",
     author="Milan Keca",
     author_email="vonum.mk@gmail.com",
     description="Ethereum utilities for mapping blocks to timestamps",
@@ -18,8 +18,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    python_requires=">=3.11",
     install_requires=[
-        "web3==5.29.0",
-        "arrow==1.2.2"
+        "web3==^6.4.0",
+        "arrow==^1.2.3"
     ]
 )
